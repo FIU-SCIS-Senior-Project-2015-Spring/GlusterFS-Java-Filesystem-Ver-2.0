@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/code/glusterfs-java-filesystem/glusterfs-java-filesystem.iml" filepath="$PROJECT_DIR$/code/glusterfs-java-filesystem/glusterfs-java-filesystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/code/glusterfs-java-filesystem-example/glusterfs-java-filesystem-example.iml" filepath="$PROJECT_DIR$/code/glusterfs-java-filesystem-example/glusterfs-java-filesystem-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code/glusterfs-java-filesystem-examples/glusterfs-java-filesystem-examples.iml" filepath="$PROJECT_DIR$/code/glusterfs-java-filesystem-examples/glusterfs-java-filesystem-examples.iml" />
       <module fileurl="file://$PROJECT_DIR$/code/glusterfs-java-filesystem-project.iml" filepath="$PROJECT_DIR$/code/glusterfs-java-filesystem-project.iml" />
     </modules>
   </component>
