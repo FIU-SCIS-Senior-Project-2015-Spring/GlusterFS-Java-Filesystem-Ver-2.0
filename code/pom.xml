@@ -8,6 +8,7 @@
     <modules>
         <module>glusterfs-java-filesystem</module>
         <module>glusterfs-java-filesystem-example</module>
+        <module>glusterfs-java-filesystem-examples</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -24,11 +24,13 @@
         <processorPath useClasspath="true" />
         <module name="glusterfs-java-filesystem" />
         <module name="glusterfs-java-filesystem-example" />
+        <module name="glusterfs-java-filesystem-examples" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="glusterfs-java-filesystem" target="1.7" />
       <module name="glusterfs-java-filesystem-example" target="1.7" />
+      <module name="glusterfs-java-filesystem-examples" target="1.7" />
       <module name="glusterfs-java-filesystem-project" target="1.7" />
     </bytecodeTargetLevel>
   </component>
