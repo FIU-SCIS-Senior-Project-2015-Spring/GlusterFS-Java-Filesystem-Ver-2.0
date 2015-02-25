@@ -24,14 +24,18 @@ public class ConnectToGlusterfsVolumeSteps {
     FileStore store;
 
     @Given("a GlusterFS volume server and name")
-    public void givenAGlusterfsVolume() throws URISyntaxException, IOException, InterruptedException {
+    public void givenAGlusterfsVolume() {
 
         System.out.printf("\n\n--------------------------------------\nSTORY: Connect To Glusterfs Volume\n" +
             "--------------------------------------\n");
 
         // server and name are already stored in a properties file (src/test/resources/examples.properties
-        properties.load(ConnectToGlusterfsVolumeSteps.class.getClassLoader().getResourceAsStream("examples.properties"));
-
+        try {
+            properties.load(ConnectToGlusterfsVolumeSteps.class.getClassLoader().getResourceAsStream("examples.properties"));
+        } catch (IOException e) {
+            System.out.printf("\n\nError in givenAGlusterfsVolume()\n\n");
+            e.printStackTrace();
+        }
         System.out.println("\nGiven");
         System.out.println("the Server name: " + properties.getProperty("glusterfs.server"));
         System.out.println("and the volume name: " + properties.getProperty("glusterfs.volume"));
