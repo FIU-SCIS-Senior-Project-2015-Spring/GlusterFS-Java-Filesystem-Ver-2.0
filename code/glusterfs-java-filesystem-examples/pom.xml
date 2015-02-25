@@ -15,15 +15,28 @@
     <name>glusterfs-java-filesystem-examples</name>
 
     <properties>
+        <glusterfs.server>172.31.31.31</glusterfs.server>
+        <glusterfs.volume>foo</glusterfs.volume>
+
         <jbehave.core.version>3.9.5</jbehave.core.version>
         <jbehave.site.version>3.1.1</jbehave.site.version>
         <embeddables>**/*Stories.java</embeddables>
-
-        <glusterfs.server>172.31.31.31</glusterfs.server>
-        <glusterfs.volume>foo</glusterfs.volume>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.peircean.glusterfs</groupId>
+            <artifactId>glusterfs-java-filesystem</artifactId>
+            <version>1.0.5-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
@@ -42,96 +55,45 @@
             <version>${jbehave.site.version}</version>
             <type>zip</type>
         </dependency>
-        <dependency>
-            <groupId>com.peircean.glusterfs</groupId>
-            <artifactId>glusterfs-java-filesystem</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <!--<resource>-->
-                <!--<directory>src/main/java</directory>-->
-                <!--<filtering>true</filtering>-->
-                <!--<excludes>-->
-                    <!--<exclude>**/*.java</exclude>-->
-                <!--</excludes>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<directory>src/main/resources</directory>-->
-                <!--<filtering>true</filtering>-->
-            <!--</resource>-->
-            <resource>
-                <!--<directory>${project.basedir}/src/main/resources</directory>-->
-                <directory>src/main/resources</directory>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
                 <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
-        <!--<pluginManagement>-->
-            <!--<plugins>-->
-                <!--<plugin>-->
-                    <!--<groupId>org.apache.maven.plugins</groupId>-->
-                    <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                    <!--<version>2.1</version>-->
-                    <!--<configuration>-->
-                        <!--<source>1.5</source>-->
-                        <!--<target>1.5</target>-->
-                    <!--</configuration>-->
-                <!--</plugin>-->
-            <!--</plugins>-->
-        <!--</pluginManagement>-->
+            </testResource>
+        </testResources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jbehave</groupId>
-                <artifactId>jbehave-maven-plugin</artifactId>
-                <version>${jbehave.core.version}</version>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
                 <executions>
                     <execution>
-                        <id>unpack-view-resources</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>unpack-view-resources</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>embeddable-stories</id>
-                        <phase>integration-test</phase>
                         <configuration>
                             <includes>
                                 <include>${embeddables}</include>
                             </includes>
-                            <excludes/>
-                            <ignoreFailureInStories>true</ignoreFailureInStories>
-                            <ignoreFailureInView>false</ignoreFailureInView>
-                            <threads>1</threads>
-                            <metaFilters>
-                                <metaFilter></metaFilter>
-                            </metaFilters>
-                            <scope>test</scope>
+
                         </configuration>
                         <goals>
-                            <goal>run-stories-as-embeddables</goal>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
