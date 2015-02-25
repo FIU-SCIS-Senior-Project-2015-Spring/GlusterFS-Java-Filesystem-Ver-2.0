@@ -58,7 +58,6 @@
     </dependencies>
 
     <build>
-
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
@@ -89,7 +88,6 @@
                             <includes>
                                 <include>${embeddables}</include>
                             </includes>
-
                         </configuration>
                         <goals>
                             <goal>integration-test</goal>
