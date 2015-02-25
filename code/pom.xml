@@ -57,10 +57,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.16</version>
                 <configuration>
-                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
                     <forkMode>once</forkMode>
                     <argLine>-ea</argLine>
-                    <failIfNoTests>true</failIfNoTests>
+                    <skipTests>false</skipTests>
+                    <failIfNoTests>false</failIfNoTests>
                     <workingDirectory>${project.build.directory}</workingDirectory>
                     <includes>
                         <include>**/*Test.java</include>
