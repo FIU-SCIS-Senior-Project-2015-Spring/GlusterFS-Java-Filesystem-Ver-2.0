@@ -1,15 +1,12 @@
 package com.peircean.glusterfs.examples.steps;
 
-import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.Properties;
 import java.io.IOException;
 import java.net.URI;
 
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
+import org.jbehave.core.annotations.*;
 
 
 public class ConnectToGlusterfsVolumeSteps {
@@ -23,11 +20,9 @@ public class ConnectToGlusterfsVolumeSteps {
     FileSystem fileSystem;
     FileStore store;
 
-    @Given("a GlusterFS volume server and name")
-    public void givenAGlusterfsVolume() {
 
-        System.out.printf("\n\n--------------------------------------\nSTORY: Connect To Glusterfs Volume\n" +
-            "--------------------------------------\n");
+    @Given("a GlusterFS volume server and name")
+    public void givenAGlusterfsVolumeAndName() {
 
         // server and name are already stored in a properties file (src/test/resources/examples.properties
         try {
@@ -45,16 +40,16 @@ public class ConnectToGlusterfsVolumeSteps {
     public void whenANewGlusterURIisCreated() {
 
         // vagrant brings up a virtual machine previously set up with the following properties
-        this.vagrantBox = properties.getProperty("glusterfs.server");
-        this.volname = properties.getProperty("glusterfs.volume");
+        vagrantBox = properties.getProperty("glusterfs.server");
+        volname = properties.getProperty("glusterfs.volume");
 
         // URI will be mounted in the virtual machine
-        this.mountUri = "gluster://" + this.vagrantBox + ":" + this.volname + "/";
-        this.testUri = "gluster://" + this.vagrantBox + ":" + this.volname + "/baz";
+        mountUri = "gluster://" + vagrantBox + ":" + volname + "/";
+        testUri = "gluster://" + vagrantBox + ":" + volname + "/baz";
 
         try {
-            this.mountPath = Paths.get(new URI(this.mountUri));
-            System.out.println("\nWhen the\n" + this.mountPath.toString() + " URI is created");
+            mountPath = Paths.get(new URI(mountUri));
+            System.out.println("\nWhen the\n" + mountPath.toString() + " URI is created");
         } catch (Exception e) {
             System.out.printf("\n\nError in whenANewGlusterURIisCreated\n\n");
             e.printStackTrace();
@@ -65,15 +60,15 @@ public class ConnectToGlusterfsVolumeSteps {
     public void aNewGlusterFileSystemIsCreated() {
 
         try {
-            this.fileSystem = FileSystems.newFileSystem(new URI(this.mountUri), null);
-            this.store = fileSystem.getFileStores().iterator().next();
+            fileSystem = FileSystems.newFileSystem(new URI(mountUri), null);
+            store = fileSystem.getFileStores().iterator().next();
 
             System.out.println("\nThen\na Gluster file sytem can be created");
             System.out.println(getProvider("gluster").toString());
-            System.out.println(this.fileSystem.toString());
-            System.out.printf("FS total space: " + this.store.getTotalSpace());
-            System.out.printf(", FS usable space: " + this.store.getUsableSpace());
-            System.out.printf(", FS unallocated space: " + this.store.getUnallocatedSpace() + "\n");
+            System.out.println(fileSystem.toString());
+            System.out.printf("FS total space: " + store.getTotalSpace());
+            System.out.printf(", FS usable space: " + store.getUsableSpace());
+            System.out.printf(", FS unallocated space: " + store.getUnallocatedSpace() + "\n");
 
         } catch (Exception e) {
             System.out.printf("\n\nError in aNewGlusterFileSystemIsCreated\n\n");
