@@ -2,6 +2,7 @@ package com.peircean.glusterfs;
 
 import com.peircean.libgfapi_jni.internal.GLFS;
 import com.peircean.libgfapi_jni.internal.structs.dirent;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -42,6 +43,7 @@ public class GlusterDirectoryIteratorTest {
     private GlusterDirectoryIterator iterator = new GlusterDirectoryIterator();
     private long dirHandle = 12345l;
 
+    
     @Test
     public void testHasNext_whenFilter() throws Exception {
         iterator.setFilter(mockFilter);

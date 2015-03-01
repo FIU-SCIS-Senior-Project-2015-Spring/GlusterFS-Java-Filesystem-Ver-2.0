@@ -3,6 +3,8 @@ package com.peircean.glusterfs.examples;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.peircean.glusterfs.examples.steps.ConnectToGlusterfsVolumeSteps;
+import com.peircean.glusterfs.examples.steps.CreateNewFileInGlusterfsSteps;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -19,7 +21,6 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.ParameterConverters.ExamplesTableConverter;
-import com.peircean.glusterfs.examples.steps.ConnectToGlusterfsVolumeSteps;
 
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
@@ -35,11 +36,11 @@ import static org.jbehave.core.reporters.Format.XML;
  * Stories are specified in classpath and correspondingly the {@link LoadFromClasspath} story loader is configured.
  * </p> 
  */
-public class ConnectToGlusterfsVolumeStories extends JUnitStories {
+public class GlusterfsStories extends JUnitStories {
     
-    public ConnectToGlusterfsVolumeStories() {
+    public GlusterfsStories() {
         configuredEmbedder().embedderControls().doGenerateViewAfterStories(true).doIgnoreFailureInStories(true)
-                .doIgnoreFailureInView(true).useThreads(2).useStoryTimeoutInSecs(60);
+                .doIgnoreFailureInView(true).useThreads(1);
     }
 
     @Override
@@ -64,13 +65,15 @@ public class ConnectToGlusterfsVolumeStories extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new ConnectToGlusterfsVolumeSteps());
+        //return new InstanceStepsFactory(configuration(), new ConnectToGlusterfsVolumeSteps(), new ListPathsOfDirectoryInGlusterfsSteps());
+        return new InstanceStepsFactory(configuration(),new ConnectToGlusterfsVolumeSteps(), new CreateNewFileInGlusterfsSteps());
+
     }
 
     @Override
     protected List<String> storyPaths() {
+        System.out.printf(new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story").toString());
         return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
-                
     }
         
 }
