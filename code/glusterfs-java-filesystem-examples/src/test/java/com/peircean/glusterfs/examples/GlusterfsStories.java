@@ -65,13 +65,14 @@ public class GlusterfsStories extends JUnitStories {
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(),new ConnectToGlusterfsVolumeSteps(), new CreateNewFileInGlusterfsSteps());
-
+        return new InstanceStepsFactory(configuration(),
+            new ConnectToGlusterfsVolumeSteps(),
+            new CreateNewFileInGlusterfsSteps()
+        );
     }
 
     @Override
     protected List<String> storyPaths() {
         return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
     }
-        
 }

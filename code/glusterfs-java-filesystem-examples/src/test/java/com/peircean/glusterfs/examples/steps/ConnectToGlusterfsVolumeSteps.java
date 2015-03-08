@@ -31,9 +31,8 @@ public class ConnectToGlusterfsVolumeSteps {
             System.out.printf("\n\nError in givenAGlusterfsVolume()\n\n");
             e.printStackTrace();
         }
-        System.out.println("\nGiven");
-        System.out.println("the Server name: " + properties.getProperty("glusterfs.server"));
-        System.out.println("and the volume name: " + properties.getProperty("glusterfs.volume"));
+        System.out.println("Server name: " + properties.getProperty("glusterfs.server"));
+        System.out.println("Volume name: " + properties.getProperty("glusterfs.volume"));
     }
 
     @When("a new Gluster URI is created")
@@ -49,7 +48,7 @@ public class ConnectToGlusterfsVolumeSteps {
 
         try {
             mountPath = Paths.get(new URI(mountUri));
-            System.out.println("\nWhen the\n" + mountPath.toString() + " URI is created");
+            System.out.println("" + mountPath.toString() + " URI is created");
         } catch (Exception e) {
             System.out.printf("\n\nError in whenANewGlusterURIisCreated\n\n");
             e.printStackTrace();
@@ -63,13 +62,8 @@ public class ConnectToGlusterfsVolumeSteps {
             fileSystem = FileSystems.newFileSystem(new URI(mountUri), null);
             store = fileSystem.getFileStores().iterator().next();
 
-            System.out.println("\nThen\na Gluster file sytem can be created");
             System.out.println(getProvider("gluster").toString());
             System.out.println(fileSystem.toString());
-            System.out.printf("FS total space: " + store.getTotalSpace());
-            System.out.printf(", FS usable space: " + store.getUsableSpace());
-            System.out.printf(", FS unallocated space: " + store.getUnallocatedSpace() + "\n");
-
         } catch (Exception e) {
             System.out.printf("\n\nError in aNewGlusterFileSystemIsCreated\n\n");
             e.printStackTrace();

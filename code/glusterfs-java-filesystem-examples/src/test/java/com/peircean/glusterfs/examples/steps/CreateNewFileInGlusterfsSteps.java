@@ -30,7 +30,6 @@ public class CreateNewFileInGlusterfsSteps {
 
     @Given("a machine with a running Glustefs volume")
     public void givenAGlusterfsVolume()  {
-        System.out.println("Given");
         setupMachineRunningGlusterfs();
     }
 
@@ -53,9 +52,9 @@ public class CreateNewFileInGlusterfsSteps {
     public void thenANewFileIsCreatedIfItDidNotExist() {
         try {
             Files.createFile(glusterPath, attrs);
-            System.out.println("Then a file is created at: " + glusterPath.toString());
+            System.out.println("File system created: " + glusterPath.toString());
         } catch (IOException e) {
-            System.out.println("But file already exists, found at " + glusterPath.toString());
+            System.out.println("File system already exists at " + glusterPath.toString());
         }
     }
 
