@@ -3,8 +3,10 @@ package com.peircean.glusterfs.examples;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import com.peircean.glusterfs.examples.steps.CheckUsageOfGlusterfsVolumeSteps;
 import com.peircean.glusterfs.examples.steps.ConnectToGlusterfsVolumeSteps;
 import com.peircean.glusterfs.examples.steps.CreateNewFileInGlusterfsSteps;
+import com.peircean.glusterfs.examples.steps.WriteToAFileInAGlusterfsVolumeSteps;
 import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -67,7 +69,9 @@ public class GlusterfsStories extends JUnitStories {
     public InjectableStepsFactory stepsFactory() {
         return new InstanceStepsFactory(configuration(),
             new ConnectToGlusterfsVolumeSteps(),
-            new CreateNewFileInGlusterfsSteps()
+            new CreateNewFileInGlusterfsSteps(),
+            new CheckUsageOfGlusterfsVolumeSteps(),
+            new WriteToAFileInAGlusterfsVolumeSteps()
         );
     }
 

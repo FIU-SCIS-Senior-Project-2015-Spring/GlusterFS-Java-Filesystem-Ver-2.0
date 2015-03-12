@@ -14,14 +14,14 @@ public class ConnectToGlusterfsVolumeSteps {
     Properties properties = new Properties();
     String vagrantBox;
     String volname;
-    String mountUri;
-    String testUri;
-    Path mountPath;
+    String mountUriString;
+    URI mountUri;
+    //Path mountPath;
     FileSystem fileSystem;
     FileStore store;
 
 
-    @Given("a GlusterFS volume server and name")
+    @Given("a GlusterFS server name and and volume name")
     public void givenAGlusterfsVolumeAndName() {
 
         // server and name are already stored in a properties file (src/test/resources/examples.properties
@@ -43,23 +43,22 @@ public class ConnectToGlusterfsVolumeSteps {
         volname = properties.getProperty("glusterfs.volume");
 
         // URI will be mounted in the virtual machine
-        mountUri = "gluster://" + vagrantBox + ":" + volname + "/";
-        testUri = "gluster://" + vagrantBox + ":" + volname + "/baz";
+        mountUriString = "gluster://" + vagrantBox + ":" + volname + "/";
 
         try {
-            mountPath = Paths.get(new URI(mountUri));
-            System.out.println("" + mountPath.toString() + " URI is created");
+            mountUri = new URI(mountUriString);
+            System.out.println("" + mountUri.toString() + " URI is created");
         } catch (Exception e) {
             System.out.printf("\n\nError in whenANewGlusterURIisCreated\n\n");
             e.printStackTrace();
         }
     }
 
-    @Then("a new GlusterFileSystem object should be created")
+    @Then("a new GlusterFileSystem object can be created")
     public void aNewGlusterFileSystemIsCreated() {
 
         try {
-            fileSystem = FileSystems.newFileSystem(new URI(mountUri), null);
+            fileSystem = FileSystems.newFileSystem(mountUri, null);
             store = fileSystem.getFileStores().iterator().next();
 
             System.out.println(getProvider("gluster").toString());
