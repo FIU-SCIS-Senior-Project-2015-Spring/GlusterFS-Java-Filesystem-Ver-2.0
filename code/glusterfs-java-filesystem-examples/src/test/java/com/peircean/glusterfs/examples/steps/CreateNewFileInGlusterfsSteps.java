@@ -52,9 +52,9 @@ public class CreateNewFileInGlusterfsSteps {
     public void thenANewFileIsCreatedIfItDidNotExist() {
         try {
             Files.createFile(glusterPath, attrs);
-            System.out.println("File system created: " + glusterPath.toString());
+            System.out.println("File created: " + glusterPath.toString());
         } catch (IOException e) {
-            System.out.println("File system already exists at " + glusterPath.toString());
+            System.out.println("File already exists at " + glusterPath.toString());
         }
     }
 
